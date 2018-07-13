@@ -1,7 +1,8 @@
 ## 使用 vueAdmin-template 的构建流程，不使用 VUEX，不使用它的MOCK，不使用它的AJAX，自己封装了AJAX
 
+```
 # Clone project
-git clone https://github.com/PanJiaChen/vueAdmin-template.git
+git clone https://github.com/40kb/qing.git
 
 # Install dependencies
 npm install
@@ -15,11 +16,16 @@ npm run dev
 # build for production with minification
 npm run build
 
+# 启用本地mock
+npm run mock
+
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
 
 ## 新增页面编辑 router/index.js，指向对应的 `src/views/**.vue` 文件
+
+
 ## 接口请求（默认为 POST）可以通过传参数形式改为 GET，请求的封装在 utils/http.js(使用jquery ajax)
 ```js
   // API 请求
