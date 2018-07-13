@@ -1,20 +1,13 @@
-# vueAdmin-template
-
-> A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
-
-**Live demo:** http://panjiachen.github.io/vueAdmin-template
-
-[中文文档](https://github.com/PanJiaChen/vueAdmin-template/blob/master/README-zh.md)
-
-## Build Setup
-
-``` bash
+## 使用 vueAdmin-template 的构建流程，不使用 VUEX，不使用它的MOCK，不使用它的AJAX，自己封装了AJAX
 
 # Clone project
 git clone https://github.com/PanJiaChen/vueAdmin-template.git
 
 # Install dependencies
 npm install
+
+# 建议不要用cnpm  安装有各种诡异的bug 可以通过如下操作解决npm速度慢的问题
+npm install --registry=https://registry.npm.taobao.org
 
 # serve with hot reload at localhost:9528
 npm run dev
@@ -26,46 +19,38 @@ npm run build
 npm run build --report
 ```
 
-## Demo
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
+## 新增页面编辑 router/index.js，指向对应的 `src/views/**.vue` 文件
+## 接口请求（默认为 POST）可以通过传参数形式改为 GET，请求的封装在 utils/http.js(使用jquery ajax)
+```js
+  // API 请求
+  // 1. 在src/api/api.js 里创建一条记录
+  // 2. data 下创建一个对应的 JSON 数据 (src/api/index.js 会处理映射关系)
+  // 3. 任何 VUE 实例/组件 能直接访问到所有的 API
 
-## Extra
-If you want router permission && generate menu by user roles , you can use this branch [permission-control](https://github.com/PanJiaChen/vueAdmin-template/tree/permission-control)
-
-## Related Project
- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-
- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
-
-### Element-Ui using cdn tutorial
-First find `index.html`([root directory](https://github.com/PanJiaChen/vueAdmin-template/blob/element-ui-cdn/index.html))
-
-Import css and js of `Element`, and then import vue. Because `Element` is vue-dependent, vue must be import before it.
-
-Then find [webpack.base.conf.js](https://github.com/PanJiaChen/vueAdmin-template/blob/element-ui-cdn/build/webpack.base.conf.js)
-Add `externals` to make webpack not package vue and element.
-
-```
-externals: {
-  vue: 'Vue',
-  'element-ui':'ELEMENT'
-}
+  // 例如：（看 views/dashboard/index.vue）
+    created() {
+      this.API.getUser({
+        data: {
+          admin: 1,
+          pwd: 2
+        }
+      }).then((res) => {
+        console.log('====== API RESPONSE ======')
+        console.log(res)
+        console.log('====== END API RESPONSE ======')
+      })
+    }
 ```
 
-Finally there is a small detail to pay attention to that if you import vue in global, you don't need to manually `Vue.use(Vuex)`, it will be automatically mounted, see
- [issue](https://github.com/vuejs/vuex/issues/731)
+## 开启本地 mock 需要新开一个窗口 `npm run mock`
 
-And you can use `npm run build --report` to see the effect
-
-Pictured:
-![demo](https://panjiachen.github.io/images/element-cdn.png)
-
-**[Detailed code](https://github.com/PanJiaChen/vueAdmin-template/commit/746aff560932704ae821f82f10b8b2a9681d5177)**
-
-**[Branch](https://github.com/PanJiaChen/vueAdmin-template/tree/element-ui-cdn)**
-
-
-## License
-[MIT](https://github.com/PanJiaChen/vueAdmin-template/blob/master/LICENSE) license.
-
-Copyright (c) 2017-present PanJiaChen
+Employee 员工管理
+Customer 客户管理
+Cash 提现管理
+Order 订单管理
+Overview 平台概况
+Commission 佣金管理
+运营设置
+Logs 后台日志管理
+organize 组织架构管理
+sys系统管理

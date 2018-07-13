@@ -59,25 +59,50 @@ export const constantRouterMap = [
     ]
   },
 
-  // 员工管理
+  // 新增 `员工管理`
+  // 顾问列表
+  // 美容师列表
   {
-    path: '/example',
+    path: '/employee',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    redirect: '/employee/consultant',
+    name: 'Employee',
     meta: { title: '员工管理', icon: 'example' },
+    children: [
+      {
+        path: 'consultant',
+        name: 'Consultant',
+        component: () => import('@/views/consultant/index'),
+        meta: { title: '顾问', icon: 'table' }
+      },
+      {
+        path: 'beautician',
+        name: 'Beautician',
+        component: () => import('@/views/beautician/index'),
+        meta: { title: '美容师', icon: 'tree' }
+      }
+    ]
+  },
+
+  // 客户管理
+  {
+    path: '/customer',
+    component: Layout,
+    redirect: '/customer/table',
+    name: 'Customer',
+    meta: { title: '客户管理', icon: 'example' },
     children: [
       {
         path: 'table',
         name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        component: () => import('@/views/consultant/index'),
+        meta: { title: '注册会员', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        component: () => import('@/views/beautician/index'),
+        meta: { title: '顾客', icon: 'tree' }
       }
     ]
   },

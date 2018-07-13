@@ -12,10 +12,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import APIPlugin from '@/plugins/APIPlugin'
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
 Vue.use(ElementUI, { locale })
+Vue.use(APIPlugin)
 
 Vue.config.productionTip = false
 
